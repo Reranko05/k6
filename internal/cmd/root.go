@@ -73,6 +73,7 @@ Examples:
   $ {{.CommandPath}} cloud run --local-execution test.js
 {{if .HasAvailableSubCommands}}
 Use "{{.CommandPath}} [command] --help" for more information about a command.
+Run 'k6 x docs' for built-in documentation and best practices.
 Full CLI documentation: %s{{end}}
 `, getDocsURL())
 }
