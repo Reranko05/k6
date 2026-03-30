@@ -169,23 +169,22 @@ func machineReadableMetricValues(m Metric) (any, error) {
 		}, nil
 	case string(machinereadable.MetricTypeTrend):
 		var values machinereadable.TrendValues
-		if avgVal, ok := m.Values["avg"]; ok {
-			values.Avg = &avgVal
-		}
-		if maxVal, ok := m.Values["max"]; ok {
-			values.Max = &maxVal
-		}
-		if medVal, ok := m.Values["med"]; ok {
-			values.Med = &medVal
-		}
-		if minVal, ok := m.Values["min"]; ok {
-			values.Min = &minVal
-		}
-		if p90Val, ok := m.Values["p(90)"]; ok {
-			values.P90 = &p90Val
-		}
-		if p95Val, ok := m.Values["p(95)"]; ok {
-			values.P95 = &p95Val
+
+		for stat, val := range m.Values {
+			switch stat {
+			case "avg":
+				values.Avg = &val
+			case "min":
+				values.Min = &val
+			case "max":
+				values.Max = &val
+			case "med":
+				values.Med = &val
+			case "p(90)":
+				values.P90 = &val
+			case "p(95)":
+				values.P95 = &val
+			}
 		}
 		return values, nil
 	default:
